@@ -18,11 +18,10 @@ public:
 		e->Graphics->FillEllipse(brsh, x - (radius / 2), y - (radius / 2), radius, radius);
 	}
 	bool checkCollision(int x, int y) {
-		if ((this->x - (radius / 2) <= x) && (this->x + (radius / 2) >= x))
+		if ((this->x - (radius / 2) <= x) && (this->x + (radius / 2) >= x)) {
 			if ((this->y - (radius / 2) <= y) && (this->y + (radius / 2) >= y))
 				return true;
-			else
-				return false;
+		}
 		else
 			return false;
 	}
