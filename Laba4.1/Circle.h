@@ -12,7 +12,7 @@ public:
 	Circle() :x(0), y(0), radius(0), selected(true) {}
 	Circle(int x, int y, int r) :x(x), y(y), radius(r), selected(true) {}
 	void draw(System::Windows::Forms::PaintEventArgs^ e) {
-		System::Drawing::Brush^ brsh = Brushes::Black;
+		System::Drawing::Brush^ brsh = Brushes::Blue;
 		if (selected)
 			brsh = Brushes::Red;
 		e->Graphics->FillEllipse(brsh, x - (radius / 2), y - (radius / 2), radius, radius);
