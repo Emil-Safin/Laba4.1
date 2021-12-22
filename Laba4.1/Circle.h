@@ -1,7 +1,7 @@
 #pragma once
 #ifndef CIRCLE_H
 #define CIRCLE_H
-
+//#include <cmath>
 using namespace System::Drawing;
 
 class Circle {
@@ -18,9 +18,8 @@ public:
 		e->Graphics->FillEllipse(brsh, x - (radius / 2), y - (radius / 2), radius, radius);
 	}
 	bool checkCollision(int x, int y) {
-		if ((this->x - (radius / 2) <= x) && (this->x + (radius / 2) >= x)) {
-			if ((this->y - (radius / 2) <= y) && (this->y + (radius / 2) >= y))
-				return true;
+		if (((x - this->x) * (x - this->x)) + (y - this->y) * ((y - this->y)) <= (radius/2 * radius/2)){
+			return true;
 		}
 		else
 			return false;

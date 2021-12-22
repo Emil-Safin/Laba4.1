@@ -61,9 +61,9 @@ namespace Laba41 {
 			// 
 			// panel1
 			// 
-			this->panel1->Location = System::Drawing::Point(184, 98);
+			this->panel1->Location = System::Drawing::Point(12, 12);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(332, 244);
+			this->panel1->Size = System::Drawing::Size(653, 432);
 			this->panel1->TabIndex = 0;
 			this->panel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MyForm::panel1_Paint);
 			this->panel1->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &MyForm::panel1_MouseClick);
@@ -95,20 +95,22 @@ namespace Laba41 {
 	private: System::Void panel1_MouseClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 		bool collision = false;
 		Circle a;
-		for (int i = 0; i < lst.GetSize(); i++) {
+		for (int i = lst.GetSize()-1; i >= 0; i--) {
 			if (lst[i].checkCollision(e->X, e->Y)) {
 				if (!ctrl && lst[i].GetSelect()) {
 					for (int i = 0; i < lst.GetSize(); i++)
 						lst[i].SetSelect(false);
 					collision = true;
+					//break;
 				}
-				else if (!ctrl) {
+				else if (!ctrl) {		
 					for (int i = 0; i < lst.GetSize(); i++)
 						lst[i].SetSelect(false);
+					lst[i].SetSelect();
 					lst.push_back(lst[i]);
 					lst.removeAt(i);
-					lst[i].SetSelect();
 					collision = true;
+					//break;
 				}
 				if (ctrl) {
 					collision = true;
@@ -118,12 +120,13 @@ namespace Laba41 {
 					}
 					else lst[i].SetSelect();
 				}
+				break;
 			}
 		}
 		if (!collision) {
 			for(int i = 0; i< lst.GetSize(); i++)
 			    lst[i].SetSelect(false);
-			a = *new Circle(e->X, e->Y, 100);
+			Circle a(e->X, e->Y, 100);
 			lst.push_back(a);
 		}
 		
