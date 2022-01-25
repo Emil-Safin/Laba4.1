@@ -83,50 +83,50 @@ namespace Laba41 {
 
 		}
 #pragma endregion
-		 List<Circle> lst;
+		 List<Circle*> lst;
 		 bool ctrl = false;
 	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
 	
 	private: System::Void panel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
 		for (int i = 0; i < lst.GetSize(); i++)
-			lst[i].draw(e);
+			lst[i]->draw(e);
 	}
 	private: System::Void panel1_MouseClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 		bool collision = false;
-		Circle a;
+	//	Circle a;
 		for (int i = lst.GetSize()-1; i >= 0; i--) {
-			if (lst[i].checkCollision(e->X, e->Y)) {
-				if (!ctrl && lst[i].GetSelect()) {
+			if (lst[i]->checkCollision(e->X, e->Y)) {
+				if (!ctrl && lst[i]->GetSelect()) {
 					for (int i = 0; i < lst.GetSize(); i++)
-						lst[i].SetSelect(false);
+						lst[i]->SetSelect(false);
 					collision = true;
 					//break;
 				}
 				else if (!ctrl) {		
 					for (int i = 0; i < lst.GetSize(); i++)
-						lst[i].SetSelect(false);
-					lst[i].SetSelect();
-					lst.push_back(lst[i]);
-					lst.removeAt(i);
+						lst[i]->SetSelect(false);
+					lst[i]->SetSelect();
+					//lst.push_back(lst[i]);
+					//lst.removeAt(i);
 					collision = true;
 					//break;
 				}
 				if (ctrl) {
 					collision = true;
-					a = lst[i];
-					if (lst[i].GetSelect()) {
-						lst[i].SetSelect(false);
+				//	a = lst[i];
+					if (lst[i]->GetSelect()) {
+						lst[i]->SetSelect(false);
 					}
-					else lst[i].SetSelect();
+					else lst[i]->SetSelect();
 				}
 				break;
 			}
 		}
 		if (!collision) {
 			for(int i = 0; i< lst.GetSize(); i++)
-			    lst[i].SetSelect(false);
-			Circle a(e->X, e->Y, 100);
+			    lst[i]->SetSelect(false);
+			Circle *a = new Circle(e->X, e->Y, 100);
 			lst.push_back(a);
 		}
 		
@@ -135,7 +135,7 @@ namespace Laba41 {
 	private: System::Void MyForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
 		if (e->KeyValue == 46) {
 			for (int i = 0; i < lst.GetSize();) {
-				if (lst[i].GetSelect()) {
+				if (lst[i]->GetSelect()) {
 					lst.removeAt(i);
 				}
 				else {
